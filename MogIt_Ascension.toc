@@ -1,7 +1,7 @@
 ﻿## Interface: 30300
 ## Version: 3.3.2
 ## LoadOnDemand: 1
-## RequiredDeps: MogIt
+## RequiredDeps: MogIt, DataStore, DataStore_Vanity
 ## X-MogItModuleVersion: 2
 
 ## Title: MogIt_Ascension
