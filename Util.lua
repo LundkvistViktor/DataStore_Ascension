@@ -1,6 +1,4 @@
-local VANITY_ITEMS = {}
-local VANITY_SPELL_REFERENCE = {}
-local VANITY_CONTENT_REFERENCE = {}
+local VANITY_ITEMS = VANITY_ITEMS
 
 local slotsTypes_modules = {
 	INVTYPE_HEAD = MogIt.base.AddSlot("Head",...),
@@ -24,27 +22,27 @@ local slotsTypes_modules = {
     INVTYPE_THROWN = MogIt.base.AddSlot("MainHand",...),
 }
 
-local function refresh_vanity()
-    local jsonData = LoadAscensionContentJSON("VanityCollectionData")
-    jsonData = jsonData and C_Serialize:FromJSON(jsonData)
+-- local function refresh_vanity()
+--     local jsonData = LoadAscensionContentJSON("VanityCollectionData")
+--     jsonData = jsonData and C_Serialize:FromJSON(jsonData)
 
-    assert(jsonData, "Data\\VanityItems: Failed to deserialize Data\\Content\\VanityCollectionData.json")
+--     assert(jsonData, "Data\\VanityItems: Failed to deserialize Data\\Content\\VanityCollectionData.json")
 
-    for _, data in ipairs(jsonData) do
-        VANITY_ITEMS[data.itemid] = tcopy(data)
+--     for _, data in ipairs(jsonData) do
+--         VANITY_ITEMS[data.itemid] = tcopy(data)
 
-        if data.learnedSpell and data.learnedSpell > 0 then
-            VANITY_SPELL_REFERENCE[data.learnedSpell] = data.itemid
-        end
+--         if data.learnedSpell and data.learnedSpell > 0 then
+--             VANITY_SPELL_REFERENCE[data.learnedSpell] = data.itemid
+--         end
 
-        if data.contentsPreview and data.contentsPreview ~= "" then 
-            local items = string.SplitToTable(data.contentsPreview, " ", tonumber)
-            for _, itemId in ipairs(items) do
-                VANITY_CONTENT_REFERENCE[itemId] = data.itemid
-            end
-        end
-    end
-end
+--         if data.contentsPreview and data.contentsPreview ~= "" then 
+--             local items = string.SplitToTable(data.contentsPreview, " ", tonumber)
+--             for _, itemId in ipairs(items) do
+--                 VANITY_CONTENT_REFERENCE[itemId] = data.itemid
+--             end
+--         end
+--     end
+-- end
 
 local function addByItemID(itemID, storeID)
     local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType,
@@ -54,16 +52,14 @@ local function addByItemID(itemID, storeID)
     end
 end
 
-refresh_vanity()
+-- refresh_vanity()
 
 for k,v in pairs(VANITY_ITEMS) do
     local itemID = v.itemid
     local contentsPreview = v.contentsPreview
-    -- sometimes contentsPreview is a space separated list of itemIDs ie. "123 456 789" then we need to split it up and add each itemID
     if contentsPreview then
         local storeID = itemID
-        local contentsPreviewSplit = {strsplit(" ",contentsPreview)}
-        for i,v in pairs(contentsPreviewSplit) do
+        for i,v in pairs(contentsPreview) do
             local itemID = tonumber(v)
             if itemID then
                 addByItemID(itemID, storeID)
