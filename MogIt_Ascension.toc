@@ -1,5 +1,6 @@
 ﻿## Interface: 30300
 ## Version: 3.3.2
+## Author: Fiat
 ## LoadOnDemand: 1
 ## RequiredDeps: MogIt
 ## X-MogItModuleVersion: 2
