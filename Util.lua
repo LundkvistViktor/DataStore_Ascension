@@ -45,6 +45,7 @@ local slotsTypes_modules = {
 -- end
 
 local function addByItemID(itemID, storeID)
+    TryCacheItem(itemID) -- wierdly, this is needed to get the item's name
     local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType,
     itemSubType, itemStackCount, itemEquipLoc, itemTexture, itemSellPrice = GetItemInfo(itemID)
     if slotsTypes_modules[itemEquipLoc] then
